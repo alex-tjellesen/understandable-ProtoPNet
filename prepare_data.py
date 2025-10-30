@@ -22,7 +22,7 @@ def download_dataset(url: str, filename: str):
     out_path = os.path.join(DATASETS_FOLDER, os.path.splitext(filename)[0], filename)
     if not os.path.exists(out_path):
         os.makedirs(os.path.dirname(out_path), exist_ok=True)
-        gdown.download(url, out_path)
+        # gdown.download(url, out_path)
     return out_path
 
 
