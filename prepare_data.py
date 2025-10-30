@@ -37,8 +37,9 @@ def unpack_dataset(filepath: str):
 
 def generate_cub200():
     """Generate cub200 dataset."""
-    print('Downloading dataset...')
-    dataset_archive_path = download_dataset(CUB200_URL, 'cub200.tgz')
+    #print('Downloading dataset...')
+    #dataset_archive_path = download_dataset(CUB200_URL, 'cub200.tgz')
+    dataset_archive_path = "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/datasets/cub200/cub200_2011.tgz"
     dataset_path = os.path.dirname(dataset_archive_path)
     print('Unpacking folder...')
     original_path = unpack_dataset(dataset_archive_path)

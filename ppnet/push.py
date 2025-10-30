@@ -25,6 +25,8 @@ def push_prototypes(dataloader,  # pytorch dataloader (must be unnormalized in [
                     save_prototype_class_identity=True,  # which class the prototype image comes from
                     log=print,
                     prototype_activation_function_in_numpy=None):
+    device = torch.device("cuda" if torch.cuda.is_available() else
+                      "mps" if torch.backends.mps.is_available() else "cpu")
 
     prototype_network_parallel.eval()
     log('\tpush')
@@ -106,8 +108,8 @@ def push_prototypes(dataloader,  # pytorch dataloader (must be unnormalized in [
     log('\tExecuting push ...')
     prototype_update = np.reshape(global_min_fmap_patches,
                                   tuple(prototype_shape))
-    prototype_network_parallel.module.prototype_vectors.data.copy_(torch.tensor(prototype_update, dtype=torch.float32).cuda())
-    # prototype_network_parallel.cuda()
+    prototype_network_parallel.module.prototype_vectors.data.copy_(torch.tensor(prototype_update, dtype=torch.float32).to(device))
+    # prototype_network_parallel.to(device)
     end = time.time()
     log('\tpush time: \t{0}'.format(end - start))
 
@@ -130,6 +132,8 @@ def update_prototypes_on_batch(search_batch_input,
                                prototype_img_filename_prefix=None,
                                prototype_self_act_filename_prefix=None,
                                prototype_activation_function_in_numpy=None):
+    device = torch.device("cuda" if torch.cuda.is_available() else
+                      "mps" if torch.backends.mps.is_available() else "cpu")
 
     prototype_network_parallel.eval()
 
@@ -142,7 +146,7 @@ def update_prototypes_on_batch(search_batch_input,
         search_batch = search_batch_input
 
     with torch.no_grad():
-        search_batch = search_batch.cuda()
+        search_batch = search_batch.to(device)
         # this computation currently is not parallelized
         protoL_input_torch, proto_dist_torch = prototype_network_parallel.module.push_forward(search_batch)
 

@@ -95,6 +95,8 @@ def run_analysis(args: Namespace):
 
 
 def _run_analysis_on_image(args: Namespace):
+    device = torch.device("cuda" if torch.cuda.is_available() else
+                      "mps" if torch.backends.mps.is_available() else "cpu")
     # Compute params
     img_path = os.path.abspath(args.img)  # ./datasets/celeb_a/gender/test/Male/1.jpg
     img_class, img_id = re.split(r'\\|/', img_path)[-2:]
@@ -124,7 +126,7 @@ def _run_analysis_on_image(args: Namespace):
     log(f'Output path: {os.path.abspath(save_analysis_path)}\n')
 
     ppnet = torch.load(args.model)
-    ppnet = ppnet.cuda()
+    ppnet = ppnet.to(device)
     ppnet_multi = torch.nn.DataParallel(ppnet)
 
     img_pil = Image.open(args.img)
@@ -166,7 +168,7 @@ def _run_analysis_on_image(args: Namespace):
     img_tensor = preprocess(img_pil)
     img_variable = Variable(img_tensor.unsqueeze(0))
 
-    images_test = img_variable.cuda()
+    images_test = img_variable.to(device)
     labels_test = torch.tensor([ dataset.class_to_idx[img_class] ])
 
     logits, min_distances = ppnet_multi(images_test)

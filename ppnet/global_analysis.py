@@ -33,6 +33,8 @@ def save_prototype_original_img_with_bbox(load_img_dir, fname, epoch, index,
 
 
 def run_analysis(args: Namespace):
+    device = torch.device("cuda" if torch.cuda.is_available() else
+                      "mps" if torch.backends.mps.is_available() else "cpu")
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpus
     train_dir = os.path.join(args.dataset, 'train')
     test_dir = os.path.join(args.dataset, 'test')
@@ -55,7 +57,7 @@ def run_analysis(args: Namespace):
     log(f'Experiment run: {experiment_run}\n')
 
     ppnet = torch.load(args.model)
-    ppnet = ppnet.cuda()
+    ppnet = ppnet.to(device)
     ppnet_multi = torch.nn.DataParallel(ppnet)
 
     img_size = ppnet_multi.module.img_size

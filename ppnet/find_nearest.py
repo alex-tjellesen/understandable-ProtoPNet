@@ -54,6 +54,8 @@ def find_k_nearest_patches_to_prototypes(dataloader,  # pytorch dataloader (must
                                          root_dir_for_saving_images='./nearest',
                                          log=print,
                                          prototype_activation_function_in_numpy=None):
+    device = torch.device("cuda" if torch.cuda.is_available() else
+                      "mps" if torch.backends.mps.is_available() else "cpu")
     # full_save=False will only return the class identity of the closest patches, but it will not save anything.
     prototype_network_parallel.eval()
     n_prototypes = prototype_network_parallel.module.num_prototypes
@@ -73,7 +75,7 @@ def find_k_nearest_patches_to_prototypes(dataloader,  # pytorch dataloader (must
             search_batch = search_batch_input
 
         with torch.no_grad():
-            search_batch = search_batch.cuda()
+            search_batch = search_batch.to(device)
             protoL_input_torch, proto_dist_torch = prototype_network_parallel.module.push_forward(search_batch)
 
         proto_dist_ = np.copy(proto_dist_torch.detach().cpu().numpy())

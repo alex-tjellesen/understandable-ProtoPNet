@@ -97,6 +97,8 @@ def prune_prototypes(
 
 
 def run_pruning(args: Namespace):
+    device = torch.device("cuda" if torch.cuda.is_available() else
+                      "mps" if torch.backends.mps.is_available() else "cpu")
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpus
     train_dir = os.path.join(args.dataset, 'train')
     test_dir = os.path.join(args.dataset, 'test')
@@ -114,7 +116,7 @@ def run_pruning(args: Namespace):
     log, logclose = create_logger(log_filename=os.path.join(model_dir, 'prune.log'))
 
     ppnet = torch.load(args.model)
-    ppnet = ppnet.cuda()
+    ppnet = ppnet.to(device)
     ppnet_multi = torch.nn.DataParallel(ppnet)
     class_specific = True
 
