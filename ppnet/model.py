@@ -28,6 +28,34 @@ base_architecture_to_features = {'resnet18': resnet18_features,
                                  'vgg19_bn': vgg19_bn_features}
 
 
+class PrototypelessNet(torch.nn.Module):
+
+    def __init__(self, num_classes: int, backbone: torch.nn.Module, prototype_shape):
+        super(PrototypelessNet, self).__init__()
+        self.prototype_shape = prototype_shape
+        self.num_prototypes = prototype_shape[0]
+        # Replace fully connected layer with a new one to num_classes
+        self.features = backbone
+        #self.features.fc = nn.Linear(in_features=backbone.fc.in_features, out_features=num_classes)
+        self.add_on_layers = nn.Sequential(
+                nn.Conv2d(in_channels=2, out_channels=2, kernel_size=1),
+                nn.ReLU(),
+                nn.Conv2d(in_channels=2, out_channels=2, kernel_size=1),
+                nn.Sigmoid()
+            )
+
+        self.prototype_vectors = nn.Parameter(torch.rand(1),
+                                              requires_grad=True)
+        
+        self.last_layer = nn.Linear(512*7*7, num_classes, bias=False)
+
+    def forward(self, x):
+        x = self.features(x)
+        x = x.view(x.size(0), -1)
+        x = self.last_layer(x)
+        return x, 1
+
+
 class PPNet(nn.Module):
 
     def __init__(self, features, img_size, prototype_shape,
@@ -287,8 +315,10 @@ class PPNet(nn.Module):
 def construct_PPNet(base_architecture, pretrained=True, img_size=224,
                     prototype_shape=(2000, 512, 1, 1), num_classes=200,
                     prototype_activation_function='log',
-                    add_on_layers_type='bottleneck'):
+                    add_on_layers_type='bottleneck', no_ppnet: bool = False):
     features = base_architecture_to_features[base_architecture](pretrained=pretrained)
+    if no_ppnet:
+        return PrototypelessNet(num_classes=num_classes, backbone=features, prototype_shape=prototype_shape)
     layer_filter_sizes, layer_strides, layer_paddings = features.conv_info()
     proto_layer_rf_info = compute_proto_layer_rf_info_v2(img_size=img_size,
                                                          layer_filter_sizes=layer_filter_sizes,
