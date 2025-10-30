@@ -55,7 +55,7 @@ def run_analysis(args: Namespace):
     log(f'Experiment run: {experiment_run}\n')
 
     ppnet = torch.load(args.model)
-    ppnet = ppnet.cuda()
+    ppnet = ppnet.to("cuda" if torch.cuda.is_available() else "cpu")
     ppnet_multi = torch.nn.DataParallel(ppnet)
 
     img_size = ppnet_multi.module.img_size

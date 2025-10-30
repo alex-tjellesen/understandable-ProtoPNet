@@ -16,7 +16,7 @@ from .preprocess import mean, std, preprocess_input_function
 
 
 def _train_or_test(model, dataloader, optimizer=None, class_specific=True, use_l1_mask=True, min_prototypes_dist=0.1,
-                   coefs=None, log=print):
+                   coefs=None, log=print, no_ppnet=False):
     '''
     model: the multi-gpu model
     dataloader:
@@ -35,8 +35,8 @@ def _train_or_test(model, dataloader, optimizer=None, class_specific=True, use_l
     total_avg_separation_cost = 0
 
     for i, (image, label) in enumerate(tqdm(dataloader)):
-        input = image.cuda()
-        target = label.cuda()
+        input = image.to("cuda" if torch.cuda.is_available() else "cpu")
+        target = label.to("cuda" if torch.cuda.is_available() else "cpu")
 
         # torch.enable_grad() has no effect outside of no_grad()
         grad_req = torch.enable_grad() if is_train else torch.no_grad()
@@ -48,42 +48,49 @@ def _train_or_test(model, dataloader, optimizer=None, class_specific=True, use_l
             # compute loss
             cross_entropy = torch.nn.functional.cross_entropy(output, target)
 
-            if class_specific:
-                max_dist = (model.module.prototype_shape[1]
-                            * model.module.prototype_shape[2]
-                            * model.module.prototype_shape[3])
+            if not no_ppnet:
+                if class_specific:
+                    max_dist = (model.module.prototype_shape[1]
+                                * model.module.prototype_shape[2]
+                                * model.module.prototype_shape[3])
 
-                # prototypes_of_correct_class is a tensor of shape batch_size * num_prototypes
-                # calculate cluster cost
-                prototypes_of_correct_class = torch.t(model.module.prototype_class_identity[:, label]).cuda()
-                inverted_distances, _ = torch.max((max_dist - min_distances) * prototypes_of_correct_class, dim=1)
-                cluster_cost = torch.mean(max_dist - inverted_distances)
+                    # prototypes_of_correct_class is a tensor of shape batch_size * num_prototypes
+                    # calculate cluster cost
+                    prototypes_of_correct_class = torch.t(model.module.prototype_class_identity[:, label]).to("cuda" if torch.cuda.is_available() else "cpu")
+                    inverted_distances, _ = torch.max((max_dist - min_distances) * prototypes_of_correct_class, dim=1)
+                    cluster_cost = torch.mean(max_dist - inverted_distances)
 
-                # calculate separation cost
-                prototypes_of_wrong_class = 1 - prototypes_of_correct_class
-                inverted_distances_to_nontarget_prototypes, _ = torch.max((max_dist - min_distances) * prototypes_of_wrong_class, dim=1)
-                separation_cost = torch.mean(max_dist - inverted_distances_to_nontarget_prototypes)
+                    # calculate separation cost
+                    prototypes_of_wrong_class = 1 - prototypes_of_correct_class
+                    inverted_distances_to_nontarget_prototypes, _ = torch.max((max_dist - min_distances) * prototypes_of_wrong_class, dim=1)
+                    separation_cost = torch.mean(max_dist - inverted_distances_to_nontarget_prototypes)
 
-                # calculate prototypes diversity cost
-                prototypes_pairwise_dist = pairwise_dist(model.module.prototype_vectors.squeeze(), squared=True)
-                prototypes_pairwise_dist = torch.clamp(min_prototypes_dist - prototypes_pairwise_dist, min=0)  # Kepp only distances lower than `min_prototypes_dist
-                prototypes_pairwise_dist = prototypes_pairwise_dist * (1 - torch.eye(model.module.prototype_shape[0], device=prototypes_pairwise_dist.device))  # Remove diagonal values
-                diversity_cost = torch.sum(prototypes_pairwise_dist) / 2  # Sum up and divide by 2 because each distance is counted twice
+                    # calculate prototypes diversity cost
+                    prototypes_pairwise_dist = pairwise_dist(model.module.prototype_vectors.squeeze(), squared=True)
+                    prototypes_pairwise_dist = torch.clamp(min_prototypes_dist - prototypes_pairwise_dist, min=0)  # Kepp only distances lower than `min_prototypes_dist
+                    prototypes_pairwise_dist = prototypes_pairwise_dist * (1 - torch.eye(model.module.prototype_shape[0], device=prototypes_pairwise_dist.device))  # Remove diagonal values
+                    diversity_cost = torch.sum(prototypes_pairwise_dist) / 2  # Sum up and divide by 2 because each distance is counted twice
 
-                # calculate avg sepration cost
-                avg_separation_cost = torch.sum(min_distances * prototypes_of_wrong_class, dim=1) / torch.sum(prototypes_of_wrong_class, dim=1)
-                avg_separation_cost = torch.mean(avg_separation_cost)         
+                    # calculate avg sepration cost
+                    avg_separation_cost = torch.sum(min_distances * prototypes_of_wrong_class, dim=1) / torch.sum(prototypes_of_wrong_class, dim=1)
+                    avg_separation_cost = torch.mean(avg_separation_cost)         
 
-                if use_l1_mask:
-                    l1_mask = 1 - torch.t(model.module.prototype_class_identity).cuda()
-                    l1 = (model.module.last_layer.weight * l1_mask).norm(p=1)
+                    if use_l1_mask:
+                        l1_mask = 1 - torch.t(model.module.prototype_class_identity).to("cuda" if torch.cuda.is_available() else "cpu")
+                        l1 = (model.module.last_layer.weight * l1_mask).norm(p=1)
+                    else:
+                        l1 = model.module.last_layer.weight.norm(p=1)
+
                 else:
+                    min_distance, _ = torch.min(min_distances, dim=1)
+                    cluster_cost = torch.mean(min_distance)
                     l1 = model.module.last_layer.weight.norm(p=1)
-
             else:
-                min_distance, _ = torch.min(min_distances, dim=1)
-                cluster_cost = torch.mean(min_distance)
-                l1 = model.module.last_layer.weight.norm(p=1)
+                l1 = 0
+                cluster_cost = torch.tensor(0.0)
+                separation_cost = torch.tensor(0.0)
+                diversity_cost = torch.tensor(0.0)
+                avg_separation_cost = torch.tensor(0.0)
 
             # evaluation statistics
             _, predicted = torch.max(output.data, 1)
@@ -92,10 +99,16 @@ def _train_or_test(model, dataloader, optimizer=None, class_specific=True, use_l
 
             n_batches += 1
             total_cross_entropy += cross_entropy.item()
-            total_cluster_cost += cluster_cost.item()
-            total_separation_cost += separation_cost.item()
-            total_diversity_cost += diversity_cost.item()
-            total_avg_separation_cost += avg_separation_cost.item()
+            if not no_ppnet:
+                total_cluster_cost += cluster_cost.item()
+                total_separation_cost += separation_cost.item()
+                total_diversity_cost += diversity_cost.item()
+                total_avg_separation_cost += avg_separation_cost.item()
+            else:
+                total_cluster_cost = 0
+                total_separation_cost = 0
+                total_diversity_cost = 0
+                total_avg_separation_cost = 0
 
         # compute gradient and do SGD step
         if is_train:
@@ -144,20 +157,20 @@ def _train_or_test(model, dataloader, optimizer=None, class_specific=True, use_l
     return n_correct / n_examples
 
 
-def train(model, dataloader, optimizer, class_specific=False, min_prototypes_dist=0.1, coefs=None, log=print):
+def train(model, dataloader, optimizer, class_specific=False, min_prototypes_dist=0.1, coefs=None, log=print, no_ppnet=False):
     assert(optimizer is not None)
 
     log('train')
     model.train()
     return _train_or_test(model=model, dataloader=dataloader, optimizer=optimizer,
-                          class_specific=class_specific, min_prototypes_dist=min_prototypes_dist, coefs=coefs, log=log)
+                          class_specific=class_specific, min_prototypes_dist=min_prototypes_dist, coefs=coefs, log=log, no_ppnet=no_ppnet)
 
 
-def test(model, dataloader, class_specific=False, log=print):
+def test(model, dataloader, class_specific=False, log=print, no_ppnet=False):
     log('test')
     model.eval()
     return _train_or_test(model=model, dataloader=dataloader, optimizer=None,
-                          class_specific=class_specific, log=log)
+                          class_specific=class_specific, log=log, no_ppnet=no_ppnet)
 
 
 def last_only(model, log=print):
@@ -194,9 +207,6 @@ def joint(model, log=print):
         p.requires_grad = True
 
     log('\tjoint')
-
-
-
 
 def run_training(args: Namespace):
     # Set default values
@@ -296,10 +306,10 @@ def run_training(args: Namespace):
                                   prototype_shape=prototype_shape,
                                   num_classes=len(train_dataset.classes),
                                   prototype_activation_function=args.prototype_activation_function,
-                                  add_on_layers_type=args.add_on_layers)
+                                  add_on_layers_type=args.add_on_layers, no_ppnet=args.no_ppnet)
     # if prototype_activation_function == 'linear':
     #    ppnet.set_last_layer_incorrect_connection(incorrect_strength=0)
-    ppnet = ppnet.cuda()
+    ppnet = ppnet.to("cuda" if torch.cuda.is_available() else "cpu")
     ppnet_multi = torch.nn.DataParallel(ppnet)
     class_specific = True
 
@@ -329,11 +339,11 @@ def run_training(args: Namespace):
         if epoch < args.warm_epochs:
             warm_only(model=ppnet_multi, log=log)
             _ = train(model=ppnet_multi, dataloader=train_loader, optimizer=warm_optimizer,
-                      class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log)
+                      class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log, no_ppnet=args.no_ppnet)
         else:
             joint(model=ppnet_multi, log=log)
             _ = train(model=ppnet_multi, dataloader=train_loader, optimizer=joint_optimizer,
-                          class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log)
+                          class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log, no_ppnet=args.no_ppnet)
             joint_lr_scheduler.step()
 
         if epoch % args.test_interval == 0:
@@ -357,7 +367,7 @@ def run_training(args: Namespace):
                 save_prototype_class_identity=True,
                 log=log)
             accu = test(model=ppnet_multi, dataloader=test_loader,
-                            class_specific=class_specific, log=log)
+                            class_specific=class_specific, log=log, no_ppnet=args.no_ppnet)
             save.save_model_w_condition(model=ppnet, model_dir=model_dir, model_name=f'{epoch:03d}push', accu=accu,
                                         target_accu=0.70, log=log)
 
@@ -366,9 +376,9 @@ def run_training(args: Namespace):
                 for i in range(20):
                     log('iteration: \t{0}'.format(i))
                     _ = train(model=ppnet_multi, dataloader=train_loader, optimizer=last_layer_optimizer,
-                                  class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log)
+                                  class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log, no_ppnet=args.no_ppnet)
                     accu = test(model=ppnet_multi, dataloader=test_loader,
-                                    class_specific=class_specific, log=log)
+                                    class_specific=class_specific, log=log, no_ppnet=args.no_ppnet)
                     save.save_model_w_condition(model=ppnet, model_dir=model_dir, model_name=f'{epoch:03d}_{i:02d}push', accu=accu,
                                                 target_accu=0.70, log=log)
         log('------------------------------------------\n')

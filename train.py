@@ -27,6 +27,7 @@ parser.add_argument('--diversity_coeff', type=float, default=0.1, help='coeffici
 parser.add_argument('--gpus', type=str, default='0', help='list of gpus to use, e.g. 0,1,2 (default: %(default)s)')
 parser.add_argument('--num_workers', type=int, default=0, help='number of workers to use for data loading (default: %(default)s)')
 parser.add_argument('--seed', type=int, default=None, help='random seed to use (default: %(default)s)')
+parser.add_argument('--no_ppnet', action='store_true', help='if set, trains a prototypeless network (default: %(default)s)')
 
 
 if __name__ == '__main__':
