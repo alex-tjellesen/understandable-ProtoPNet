@@ -39,4 +39,5 @@ python train.py --dataset /zhome/ea/6/187439/understandable-ProtoPNet/datasets/c
 
 git add .
 git commit -m "Completed training run: no_ppnet"
+git pull origin hpc_run
 git push origin hpc_run
