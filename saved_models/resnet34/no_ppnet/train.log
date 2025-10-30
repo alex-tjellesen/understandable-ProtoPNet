@@ -1,0 +1,17 @@
+training set size: 5994
+push set size: 5994
+test set size: 5794
+batch size: 128
+
+Start training
+epoch: 	0
+	warm
+train
+	time: 	9.92
+	cross ent: 	5.76626
+	cluster: 	0.00000
+	separation:	0.00000
+	diversity:	0.00000
+	avg separation:	0.00000
+	accu: 		0.55055%
+	l1: 		15840.06
