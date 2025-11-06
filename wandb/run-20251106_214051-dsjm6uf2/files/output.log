@@ -1,0 +1,159 @@
+Warning: model directory "dbu_1" already exists, overwriting...
+training set size: 430
+push set size: 430
+test set size: 139
+batch size: 32
+
+Start training
+epoch: 	0
+	warm
+train
+100%|██████████████████████████████████████████████████████████████████████████| 14/14 [00:48<00:00,  3.49s/it]
+	time: 	48.89
+	cross ent: 	0.58388
+	cluster: 	7.51890
+	separation:	21.50020
+	diversity:	0.00000
+	avg separation:	25.20151
+	accu: 		90.93023%
+	l1: 		30.00
+	avg proto dist:	4.36879
+test
+100%|████████████████████████████████████████████████████████████████████████████| 5/5 [00:13<00:00,  2.76s/it]
+	time: 	13.78
+	cross ent: 	0.58645
+	cluster: 	7.01033
+	separation:	18.69918
+	diversity:	0.00000
+	avg separation:	25.69073
+	accu: 		89.20863%
+	l1: 		30.00
+	avg proto dist:	4.36879
+	above 70.00%
+------------------------------------------
+
+epoch: 	1
+	warm
+train
+100%|██████████████████████████████████████████████████████████████████████████| 14/14 [00:43<00:00,  3.13s/it]
+	time: 	43.77
+	cross ent: 	0.41183
+	cluster: 	2.80237
+	separation:	23.01188
+	diversity:	0.00000
+	avg separation:	27.18370
+	accu: 		94.41860%
+	l1: 		30.00
+	avg proto dist:	4.40007
+------------------------------------------
+
+epoch: 	2
+	warm
+train
+100%|██████████████████████████████████████████████████████████████████████████| 14/14 [00:40<00:00,  2.91s/it]
+	time: 	40.69
+	cross ent: 	0.30549
+	cluster: 	2.16580
+	separation:	23.92388
+	diversity:	0.00000
+	avg separation:	27.82140
+	accu: 		94.41860%
+	l1: 		30.00
+	avg proto dist:	4.44188
+------------------------------------------
+
+epoch: 	3
+	warm
+train
+100%|██████████████████████████████████████████████████████████████████████████| 14/14 [00:44<00:00,  3.20s/it]
+	time: 	44.75
+	cross ent: 	0.24303
+	cluster: 	1.94761
+	separation:	25.67432
+	diversity:	0.00000
+	avg separation:	29.21208
+	accu: 		94.41860%
+	l1: 		30.00
+	avg proto dist:	4.48491
+------------------------------------------
+
+epoch: 	4
+	warm
+train
+ 64%|████████████████████████████████████████████████▏                          | 9/14 [00:29<00:16,  3.26s/it]
+Traceback (most recent call last):
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/train.py", line 36, in <module>
+    run_training(args)
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/train_and_test.py", line 367, in run_training
+    _ = train(model=ppnet_multi, dataloader=train_loader, optimizer=warm_optimizer,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/train_and_test.py", line 184, in train
+    return _train_or_test(model=model, dataloader=dataloader, optimizer=optimizer,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/train_and_test.py", line 46, in _train_or_test
+    output, min_distances = model(input)
+                            ^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/parallel/data_parallel.py", line 167, in forward
+    return self.module(*inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 218, in forward
+    distances = self.prototype_distances(x)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 205, in prototype_distances
+    conv_features = self.conv_features(x)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 151, in conv_features
+    x = self.features(x)
+        ^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/resnet_features.py", line 200, in forward
+    x = self.layer1(x)
+        ^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/resnet_features.py", line 51, in forward
+    out = self.conv2(out)
+          ^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

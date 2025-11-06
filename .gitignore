@@ -7,5 +7,6 @@ pretrained_models
 docs
 analysis
 .venv
-pretrained_models_own/*
+pretrained_models_own
 pretrained_models_own.zip
+data/

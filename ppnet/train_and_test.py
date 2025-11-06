@@ -7,7 +7,7 @@ import torch
 import torch.utils.data
 import torchvision.transforms as T
 import torchvision.datasets as datasets
-
+import wandb
 
 from .helpers import set_seed, pairwise_dist
 from . import model, push, save
@@ -16,7 +16,7 @@ from .preprocess import mean, std, preprocess_input_function
 
 
 def _train_or_test(model, dataloader, optimizer=None, class_specific=True, use_l1_mask=True, min_prototypes_dist=0.1,
-                   coefs=None, log=print, no_ppnet=False):
+                   coefs=None, log=print, no_ppnet=False, epoch=None):
     '''
     model: the multi-gpu model
     dataloader:
@@ -46,7 +46,7 @@ def _train_or_test(model, dataloader, optimizer=None, class_specific=True, use_l
             output, min_distances = model(input)
 
             # compute loss
-            cross_entropy = torch.nn.functional.cross_entropy(output, target)
+            cross_entropy = torch.nn.functional.cross_entropy(output, target, weight=torch.tensor([0.5625, 4.5]))
 
             if not no_ppnet:
                 if class_specific:
@@ -154,23 +154,42 @@ def _train_or_test(model, dataloader, optimizer=None, class_specific=True, use_l
         p_avg_pair_dist = torch.mean(pairwise_dist(p, squared=False))
     log('\tavg proto dist:\t{0:.5f}'.format(p_avg_pair_dist.item()))
 
+    # Log to wandb
+    if epoch is not None:
+        prefix = "train" if is_train else "test"
+        wandb.log({
+            f"{prefix}/accuracy": n_correct / n_examples * 100,
+            f"{prefix}/cross_entropy": total_cross_entropy / n_batches,
+            f"{prefix}/cluster_cost": total_cluster_cost / n_batches,
+            f"{prefix}/l1": model.module.last_layer.weight.norm(p=1).item(),
+            f"{prefix}/avg_proto_dist": p_avg_pair_dist.item(),
+            "epoch": epoch,
+        })
+        if class_specific:
+            wandb.log({
+                f"{prefix}/separation_cost": total_separation_cost / n_batches,
+                f"{prefix}/diversity_cost": total_diversity_cost / n_batches,
+                f"{prefix}/avg_separation_cost": total_avg_separation_cost / n_batches,
+                "epoch": epoch,
+            })
+
     return n_correct / n_examples
 
 
-def train(model, dataloader, optimizer, class_specific=False, min_prototypes_dist=0.1, coefs=None, log=print, no_ppnet=False):
+def train(model, dataloader, optimizer, class_specific=False, min_prototypes_dist=0.1, coefs=None, log=print, no_ppnet=False, epoch=None):
     assert(optimizer is not None)
 
     log('train')
     model.train()
     return _train_or_test(model=model, dataloader=dataloader, optimizer=optimizer,
-                          class_specific=class_specific, min_prototypes_dist=min_prototypes_dist, coefs=coefs, log=log, no_ppnet=no_ppnet)
+                          class_specific=class_specific, min_prototypes_dist=min_prototypes_dist, coefs=coefs, log=log, no_ppnet=no_ppnet, epoch=epoch)
 
 
-def test(model, dataloader, class_specific=False, log=print, no_ppnet=False):
+def test(model, dataloader, class_specific=False, log=print, no_ppnet=False, epoch=None):
     log('test')
     model.eval()
     return _train_or_test(model=model, dataloader=dataloader, optimizer=None,
-                          class_specific=class_specific, log=log, no_ppnet=no_ppnet)
+                          class_specific=class_specific, log=log, no_ppnet=no_ppnet, epoch=epoch)
 
 
 def last_only(model, log=print):
@@ -233,6 +252,13 @@ def run_training(args: Namespace):
     set_seed(args.seed)
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpus
     print('GPUs:', os.environ['CUDA_VISIBLE_DEVICES'])
+
+    # Initialize wandb
+    wandb.init(
+        project="protopnet",
+        name=args.exp_name,
+        config=vars(args)
+    )
 
     base_architecture_type = re.match('^[a-z]*', args.architecture).group(0)
     model_dir = os.path.join('./saved_models', args.architecture, args.exp_name)
@@ -339,16 +365,18 @@ def run_training(args: Namespace):
         if epoch < args.warm_epochs:
             warm_only(model=ppnet_multi, log=log)
             _ = train(model=ppnet_multi, dataloader=train_loader, optimizer=warm_optimizer,
-                      class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log, no_ppnet=args.no_ppnet)
+                      class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log, no_ppnet=args.no_ppnet, epoch=epoch)
+            wandb.log({"learning_rate": warm_optimizer.param_groups[0]['lr'], "epoch": epoch})
         else:
             joint(model=ppnet_multi, log=log)
             _ = train(model=ppnet_multi, dataloader=train_loader, optimizer=joint_optimizer,
-                          class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log, no_ppnet=args.no_ppnet)
+                          class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log, no_ppnet=args.no_ppnet, epoch=epoch)
             joint_lr_scheduler.step()
+            wandb.log({"learning_rate": joint_optimizer.param_groups[0]['lr'], "epoch": epoch})
 
         if epoch % args.test_interval == 0:
             accu = test(model=ppnet_multi, dataloader=test_loader,
-                            class_specific=class_specific, log=log)
+                            class_specific=class_specific, log=log, epoch=epoch)
             save.save_model_w_condition(model=ppnet, model_dir=model_dir, model_name=f'{epoch:03d}nopush', accu=accu,
                                         target_accu=0.70, log=log, epoch=epoch)
 
@@ -367,7 +395,7 @@ def run_training(args: Namespace):
                 save_prototype_class_identity=True,
                 log=log)
             accu = test(model=ppnet_multi, dataloader=test_loader,
-                            class_specific=class_specific, log=log, no_ppnet=args.no_ppnet)
+                            class_specific=class_specific, log=log, no_ppnet=args.no_ppnet, epoch=epoch)
             save.save_model_w_condition(model=ppnet, model_dir=model_dir, model_name=f'{epoch:03d}push', accu=accu,
                                         target_accu=0.70, log=log)
 
@@ -376,10 +404,12 @@ def run_training(args: Namespace):
                 for i in range(20):
                     log('iteration: \t{0}'.format(i))
                     _ = train(model=ppnet_multi, dataloader=train_loader, optimizer=last_layer_optimizer,
-                                  class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log, no_ppnet=args.no_ppnet)
+                                  class_specific=class_specific, min_prototypes_dist=args.min_diversity, coefs=coefs, log=log, no_ppnet=args.no_ppnet, epoch=epoch)
                     accu = test(model=ppnet_multi, dataloader=test_loader,
-                                    class_specific=class_specific, log=log, no_ppnet=args.no_ppnet)
+                                    class_specific=class_specific, log=log, no_ppnet=args.no_ppnet, epoch=epoch)
                     save.save_model_w_condition(model=ppnet, model_dir=model_dir, model_name=f'{epoch:03d}_{i:02d}push', accu=accu,
                                                 target_accu=0.70, log=log)
         log('------------------------------------------\n')
+    
+    wandb.finish()
     logclose()

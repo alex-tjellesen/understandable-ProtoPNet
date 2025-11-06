@@ -1,0 +1,19 @@
+training set size: 430
+push set size: 430
+test set size: 139
+batch size: 32
+Downloading: "https://download.pytorch.org/models/resnet34-333f7ec4.pth" to ./pretrained_models/resnet34-333f7ec4.pth
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 83.3M/83.3M [00:08<00:00, 9.83MB/s]
+Traceback (most recent call last):
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/train.py", line 36, in <module>
+    run_training(args)
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/train_and_test.py", line 330, in run_training
+    ppnet = model.construct_PPNet(base_architecture=args.architecture,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 328, in construct_PPNet
+    return PPNet(features=features,
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 82, in __init__
+    assert(self.num_prototypes % self.num_classes == 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

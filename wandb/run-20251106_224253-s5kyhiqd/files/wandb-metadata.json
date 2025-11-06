@@ -1,0 +1,53 @@
+{
+  "os": "macOS-15.6.1-arm64-arm-64bit",
+  "python": "CPython 3.11.9",
+  "startedAt": "2025-11-06T21:42:53.191712Z",
+  "args": [
+    "--dataset",
+    "data/dbu",
+    "--exp_name",
+    "dbu_1",
+    "--epochs",
+    "11",
+    "--warm_epochs",
+    "2",
+    "--num_prototypes",
+    "10",
+    "--test_interval",
+    "1",
+    "--push_interval",
+    "10"
+  ],
+  "program": "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/train.py",
+  "codePath": "train.py",
+  "codePathLocal": "train.py",
+  "git": {
+    "remote": "git@github-bertramhage:alex-tjellesen/understandable-ProtoPNet.git",
+    "commit": "b770a64f72787ebbf760d13e5e219ac2dc9925af"
+  },
+  "email": "bertram.hage@gmail.com",
+  "root": "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet",
+  "host": "Mac",
+  "executable": "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/bin/python",
+  "cpu_count": 8,
+  "cpu_count_logical": 8,
+  "disk": {
+    "/": {
+      "total": "494384795648",
+      "used": "439720566784"
+    }
+  },
+  "memory": {
+    "total": "17179869184"
+  },
+  "apple": {
+    "name": "Apple M2",
+    "ecpuCores": 4,
+    "pcpuCores": 4,
+    "gpuCores": 8,
+    "memoryGb": 16,
+    "swapTotalBytes": "10737418240",
+    "ramTotalBytes": "17179869184"
+  },
+  "writerId": "gy4xllpm08xnx2xvvy68s1a09nxt3o69"
+}

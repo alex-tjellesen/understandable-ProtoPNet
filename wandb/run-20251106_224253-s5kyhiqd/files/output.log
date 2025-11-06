@@ -1,0 +1,141 @@
+Warning: model directory "dbu_1" already exists, overwriting...
+training set size: 430
+push set size: 430
+test set size: 139
+batch size: 32
+
+Start training
+epoch: 	0
+	warm
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:17<00:00,  1.28s/it]
+	time: 	17.92
+	cross ent: 	0.65008
+	cluster: 	7.70306
+	separation:	18.86256
+	diversity:	0.00000
+	avg separation:	21.90575
+	accu: 		85.34884%
+	l1: 		15.00
+	avg proto dist:	4.26235
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:05<00:00,  1.09s/it]
+	time: 	5.45
+	cross ent: 	0.63748
+	cluster: 	6.43908
+	separation:	17.15432
+	diversity:	0.00000
+	avg separation:	23.65420
+	accu: 		89.20863%
+	l1: 		15.00
+	avg proto dist:	4.26235
+	above 70.00%
+------------------------------------------
+
+epoch: 	1
+	warm
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:23<00:00,  1.68s/it]
+	time: 	23.50
+	cross ent: 	0.64360
+	cluster: 	2.77999
+	separation:	22.14766
+	diversity:	0.00000
+	avg separation:	25.44240
+	accu: 		94.41860%
+	l1: 		15.00
+	avg proto dist:	4.32157
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:10<00:00,  2.07s/it]
+	time: 	10.36
+	cross ent: 	0.66772
+	cluster: 	5.34982
+	separation:	17.52727
+	diversity:	0.00000
+	avg separation:	22.13717
+	accu: 		89.20863%
+	l1: 		15.00
+	avg proto dist:	4.32157
+	above 70.00%
+------------------------------------------
+
+epoch: 	2
+	joint
+train
+ 64%|█████████████████████████████████████████████████████████████████████████████████▋                                             | 9/14 [00:53<00:29,  5.97s/it]
+Traceback (most recent call last):
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/train.py", line 36, in <module>
+    run_training(args)
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/train_and_test.py", line 372, in run_training
+    _ = train(model=ppnet_multi, dataloader=train_loader, optimizer=joint_optimizer,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/train_and_test.py", line 184, in train
+    return _train_or_test(model=model, dataloader=dataloader, optimizer=optimizer,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/train_and_test.py", line 46, in _train_or_test
+    output, min_distances = model(input)
+                            ^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/parallel/data_parallel.py", line 167, in forward
+    return self.module(*inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 218, in forward
+    distances = self.prototype_distances(x)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 205, in prototype_distances
+    conv_features = self.conv_features(x)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 151, in conv_features
+    x = self.features(x)
+        ^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/resnet_features.py", line 203, in forward
+    x = self.layer4(x)
+        ^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/resnet_features.py", line 51, in forward
+    out = self.conv2(out)
+          ^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

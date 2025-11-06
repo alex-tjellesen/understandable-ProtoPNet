@@ -1,0 +1,100 @@
+_wandb:
+    value:
+        cli_version: 0.22.3
+        e:
+            wdy4dhou2857lt0b9ao3ztbjovt9ho85:
+                apple:
+                    ecpuCores: 4
+                    gpuCores: 8
+                    memoryGb: 16
+                    name: Apple M2
+                    pcpuCores: 4
+                    ramTotalBytes: "17179869184"
+                    swapTotalBytes: "8589934592"
+                args:
+                    - --dataset
+                    - data/dbu
+                    - --exp_name
+                    - dbu_1
+                    - --epochs
+                    - "300"
+                    - --warm_epochs
+                    - "30"
+                    - --num_prototypes
+                    - "20"
+                codePath: train.py
+                codePathLocal: train.py
+                cpu_count: 8
+                cpu_count_logical: 8
+                disk:
+                    /:
+                        total: "494384795648"
+                        used: "428636143616"
+                email: bertram.hage@gmail.com
+                executable: /Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/bin/python
+                git:
+                    commit: b770a64f72787ebbf760d13e5e219ac2dc9925af
+                    remote: git@github-bertramhage:alex-tjellesen/understandable-ProtoPNet.git
+                host: Mac
+                memory:
+                    total: "17179869184"
+                os: macOS-15.6.1-arm64-arm-64bit
+                program: /Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/train.py
+                python: CPython 3.11.9
+                root: /Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet
+                startedAt: "2025-11-06T20:40:51.051848Z"
+                writerId: wdy4dhou2857lt0b9ao3ztbjovt9ho85
+        m: []
+        python_version: 3.11.9
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+                - 16
+            "4": 3.11.9
+            "5": 0.22.3
+            "12": 0.22.3
+            "13": darwin-arm64
+add_on_layers:
+    value: regular
+architecture:
+    value: resnet34
+batch_size:
+    value: 32
+dataset:
+    value: data/dbu
+diversity_coeff:
+    value: 0.1
+epochs:
+    value: 300
+exp_name:
+    value: dbu_1
+gpus:
+    value: "0"
+img_size:
+    value: 224
+min_diversity:
+    value: 0.1
+no_ppnet:
+    value: false
+num_prototypes:
+    value: 20
+num_workers:
+    value: 0
+prototype_activation_function:
+    value: log
+push_interval:
+    value: 300
+seed:
+    value: null
+step_size:
+    value: 150
+test_interval:
+    value: 30
+warm_epochs:
+    value: 30

@@ -1,0 +1,995 @@
+Warning: model directory "dbu_1" already exists, overwriting...
+training set size: 430
+push set size: 430
+test set size: 139
+batch size: 32
+
+Start training
+epoch: 	0
+	warm
+train
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:39<00:00,  2.81s/it]
+	time: 	39.32
+	cross ent: 	0.59737
+	cluster: 	7.78116
+	separation:	19.97757
+	diversity:	0.00000
+	avg separation:	24.43533
+	accu: 		94.41860%
+	l1: 		15.00
+	avg proto dist:	4.13081
+test
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:11<00:00,  2.26s/it]
+	time: 	11.29
+	cross ent: 	0.61274
+	cluster: 	7.61349
+	separation:	18.45871
+	diversity:	0.00000
+	avg separation:	24.69584
+	accu: 		89.20863%
+	l1: 		15.00
+	avg proto dist:	4.13081
+	above 70.00%
+------------------------------------------
+
+epoch: 	1
+	warm
+train
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:35<00:00,  2.50s/it]
+	time: 	35.01
+	cross ent: 	0.44177
+	cluster: 	2.92428
+	separation:	20.61266
+	diversity:	0.00000
+	avg separation:	24.65791
+	accu: 		94.41860%
+	l1: 		15.00
+	avg proto dist:	4.16026
+test
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:10<00:00,  2.15s/it]
+	time: 	10.75
+	cross ent: 	0.55699
+	cluster: 	5.39881
+	separation:	16.65637
+	diversity:	0.00000
+	avg separation:	21.16584
+	accu: 		89.20863%
+	l1: 		15.00
+	avg proto dist:	4.16026
+	above 70.00%
+------------------------------------------
+
+epoch: 	2
+	joint
+train
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [01:43<00:00,  7.42s/it]
+	time: 	103.83
+	cross ent: 	0.30424
+	cluster: 	1.99393
+	separation:	22.31735
+	diversity:	0.00000
+	avg separation:	25.80580
+	accu: 		94.41860%
+	l1: 		15.00
+	avg proto dist:	4.23064
+test
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:12<00:00,  2.46s/it]
+	time: 	12.33
+	cross ent: 	0.55476
+	cluster: 	5.36861
+	separation:	18.84698
+	diversity:	0.00000
+	avg separation:	23.34229
+	accu: 		89.20863%
+	l1: 		15.00
+	avg proto dist:	4.23064
+	above 70.00%
+------------------------------------------
+
+epoch: 	3
+	joint
+train
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [01:43<00:00,  7.38s/it]
+	time: 	103.30
+	cross ent: 	0.22731
+	cluster: 	1.49713
+	separation:	25.34515
+	diversity:	0.00000
+	avg separation:	28.99590
+	accu: 		94.41860%
+	l1: 		15.00
+	avg proto dist:	4.34728
+test
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:10<00:00,  2.16s/it]
+	time: 	10.80
+	cross ent: 	0.77957
+	cluster: 	5.39060
+	separation:	21.60079
+	diversity:	0.00000
+	avg separation:	26.07014
+	accu: 		89.20863%
+	l1: 		15.00
+	avg proto dist:	4.34728
+	above 70.00%
+------------------------------------------
+
+epoch: 	4
+	joint
+train
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [01:44<00:00,  7.49s/it]
+	time: 	104.91
+	cross ent: 	0.25755
+	cluster: 	1.44361
+	separation:	28.14413
+	diversity:	0.00000
+	avg separation:	31.18735
+	accu: 		94.41860%
+	l1: 		15.00
+	avg proto dist:	4.50290
+test
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:10<00:00,  2.16s/it]
+	time: 	10.81
+	cross ent: 	0.79284
+	cluster: 	4.80295
+	separation:	24.02213
+	diversity:	0.00000
+	avg separation:	27.56396
+	accu: 		89.20863%
+	l1: 		15.00
+	avg proto dist:	4.50290
+	above 70.00%
+------------------------------------------
+
+epoch: 	5
+	joint
+train
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [01:43<00:00,  7.39s/it]
+	time: 	103.43
+	cross ent: 	0.21702
+	cluster: 	1.11664
+	separation:	31.73756
+	diversity:	0.00000
+	avg separation:	33.88658
+	accu: 		94.41860%
+	l1: 		15.00
+	avg proto dist:	4.71267
+test
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:11<00:00,  2.22s/it]
+	time: 	11.12
+	cross ent: 	0.74429
+	cluster: 	4.08704
+	separation:	26.70230
+	diversity:	0.00000
+	avg separation:	30.26290
+	accu: 		89.20863%
+	l1: 		15.00
+	avg proto dist:	4.71267
+	above 70.00%
+	push
+	Executing push ...
+	push time: 	37.78846216201782
+test
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:11<00:00,  2.34s/it]
+	time: 	11.70
+	cross ent: 	0.74326
+	cluster: 	0.77561
+	separation:	9.55151
+	diversity:	0.10000
+	avg separation:	11.33676
+	accu: 		87.76978%
+	l1: 		15.00
+	avg proto dist:	1.39295
+	above 70.00%
+	last layer
+iteration: 	0
+train
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:41<00:00,  3.00s/it]
+	time: 	41.98
+	cross ent: 	0.25145
+	cluster: 	0.39310
+	separation:	13.00547
+	diversity:	0.10000
+	avg separation:	15.01208
+	accu: 		93.95349%
+	l1: 		14.99
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:11<00:00,  2.26s/it]
+	time: 	11.31
+	cross ent: 	0.67389
+	cluster: 	0.68257
+	separation:	9.82202
+	diversity:	0.10000
+	avg separation:	11.53341
+	accu: 		88.48921%
+	l1: 		14.99
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	1
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:41<00:00,  2.99s/it]
+	time: 	41.89
+	cross ent: 	0.19310
+	cluster: 	0.34883
+	separation:	13.28795
+	diversity:	0.10000
+	avg separation:	15.30169
+	accu: 		95.34884%
+	l1: 		14.99
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:16<00:00,  3.34s/it]
+	time: 	16.69
+	cross ent: 	0.68592
+	cluster: 	0.62148
+	separation:	9.69273
+	diversity:	0.10000
+	avg separation:	11.35030
+	accu: 		87.76978%
+	l1: 		14.99
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	2
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:45<00:00,  3.23s/it]
+	time: 	45.16
+	cross ent: 	0.22716
+	cluster: 	0.43365
+	separation:	13.08771
+	diversity:	0.10000
+	avg separation:	15.12693
+	accu: 		94.41860%
+	l1: 		14.99
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:10<00:00,  2.16s/it]
+	time: 	10.82
+	cross ent: 	0.70111
+	cluster: 	0.71113
+	separation:	9.93033
+	diversity:	0.10000
+	avg separation:	11.64592
+	accu: 		87.76978%
+	l1: 		14.99
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	3
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:38<00:00,  2.78s/it]
+	time: 	38.97
+	cross ent: 	0.17519
+	cluster: 	0.34745
+	separation:	13.29352
+	diversity:	0.10000
+	avg separation:	15.30081
+	accu: 		95.34884%
+	l1: 		14.99
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:11<00:00,  2.36s/it]
+	time: 	11.78
+	cross ent: 	0.72610
+	cluster: 	0.67008
+	separation:	9.88728
+	diversity:	0.10000
+	avg separation:	11.57502
+	accu: 		87.76978%
+	l1: 		14.99
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	4
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:40<00:00,  2.88s/it]
+	time: 	40.26
+	cross ent: 	0.24998
+	cluster: 	0.48246
+	separation:	13.30227
+	diversity:	0.10000
+	avg separation:	15.39195
+	accu: 		94.65116%
+	l1: 		14.98
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:10<00:00,  2.05s/it]
+	time: 	10.26
+	cross ent: 	0.70806
+	cluster: 	0.61557
+	separation:	9.64645
+	diversity:	0.10000
+	avg separation:	11.28812
+	accu: 		87.05036%
+	l1: 		14.98
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	5
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:37<00:00,  2.66s/it]
+	time: 	37.25
+	cross ent: 	0.22674
+	cluster: 	0.46983
+	separation:	13.16836
+	diversity:	0.10000
+	avg separation:	15.22483
+	accu: 		94.41860%
+	l1: 		14.98
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:11<00:00,  2.31s/it]
+	time: 	11.56
+	cross ent: 	0.70257
+	cluster: 	0.61838
+	separation:	9.71384
+	diversity:	0.10000
+	avg separation:	11.36647
+	accu: 		87.76978%
+	l1: 		14.98
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	6
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:42<00:00,  3.05s/it]
+	time: 	42.69
+	cross ent: 	0.20452
+	cluster: 	0.49729
+	separation:	13.06623
+	diversity:	0.10000
+	avg separation:	15.13793
+	accu: 		94.41860%
+	l1: 		14.98
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:11<00:00,  2.35s/it]
+	time: 	11.76
+	cross ent: 	0.71448
+	cluster: 	0.74363
+	separation:	10.00041
+	diversity:	0.10000
+	avg separation:	11.73239
+	accu: 		87.76978%
+	l1: 		14.98
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	7
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:44<00:00,  3.20s/it]
+	time: 	44.76
+	cross ent: 	0.18636
+	cluster: 	0.41248
+	separation:	13.31413
+	diversity:	0.10000
+	avg separation:	15.36536
+	accu: 		95.11628%
+	l1: 		14.97
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:14<00:00,  2.84s/it]
+	time: 	14.19
+	cross ent: 	0.70352
+	cluster: 	0.62602
+	separation:	9.74623
+	diversity:	0.10000
+	avg separation:	11.40411
+	accu: 		87.76978%
+	l1: 		14.97
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	8
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:55<00:00,  3.94s/it]
+	time: 	55.20
+	cross ent: 	0.24319
+	cluster: 	0.49502
+	separation:	13.25756
+	diversity:	0.10000
+	avg separation:	15.34178
+	accu: 		94.18605%
+	l1: 		14.97
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:16<00:00,  3.29s/it]
+	time: 	16.44
+	cross ent: 	0.70520
+	cluster: 	0.60542
+	separation:	9.69592
+	diversity:	0.10000
+	avg separation:	11.34009
+	accu: 		87.05036%
+	l1: 		14.97
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	9
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:49<00:00,  3.51s/it]
+	time: 	49.18
+	cross ent: 	0.22642
+	cluster: 	0.47939
+	separation:	13.27664
+	diversity:	0.10000
+	avg separation:	15.35706
+	accu: 		94.65116%
+	l1: 		14.97
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:11<00:00,  2.25s/it]
+	time: 	11.27
+	cross ent: 	0.70090
+	cluster: 	0.58708
+	separation:	9.55914
+	diversity:	0.10000
+	avg separation:	11.18321
+	accu: 		87.05036%
+	l1: 		14.97
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	10
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:44<00:00,  3.17s/it]
+	time: 	44.33
+	cross ent: 	0.18362
+	cluster: 	0.38719
+	separation:	13.14725
+	diversity:	0.10000
+	avg separation:	15.17690
+	accu: 		95.58140%
+	l1: 		14.96
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:11<00:00,  2.24s/it]
+	time: 	11.18
+	cross ent: 	0.70334
+	cluster: 	0.62829
+	separation:	9.71424
+	diversity:	0.10000
+	avg separation:	11.37411
+	accu: 		87.76978%
+	l1: 		14.96
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	11
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:46<00:00,  3.35s/it]
+	time: 	46.91
+	cross ent: 	0.21933
+	cluster: 	0.41559
+	separation:	13.19666
+	diversity:	0.10000
+	avg separation:	15.23047
+	accu: 		94.65116%
+	l1: 		14.96
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:12<00:00,  2.53s/it]
+	time: 	12.66
+	cross ent: 	0.72130
+	cluster: 	0.69249
+	separation:	9.83390
+	diversity:	0.10000
+	avg separation:	11.53294
+	accu: 		87.76978%
+	l1: 		14.96
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	12
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:38<00:00,  2.72s/it]
+	time: 	38.10
+	cross ent: 	0.21802
+	cluster: 	0.49356
+	separation:	13.27375
+	diversity:	0.10000
+	avg separation:	15.36020
+	accu: 		94.88372%
+	l1: 		14.96
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:10<00:00,  2.18s/it]
+	time: 	10.91
+	cross ent: 	0.69826
+	cluster: 	0.62677
+	separation:	9.69947
+	diversity:	0.10000
+	avg separation:	11.35461
+	accu: 		87.76978%
+	l1: 		14.96
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	13
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:35<00:00,  2.57s/it]
+	time: 	35.95
+	cross ent: 	0.19921
+	cluster: 	0.32630
+	separation:	13.21559
+	diversity:	0.10000
+	avg separation:	15.21392
+	accu: 		95.34884%
+	l1: 		14.95
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:10<00:00,  2.16s/it]
+	time: 	10.79
+	cross ent: 	0.70471
+	cluster: 	0.63008
+	separation:	9.77862
+	diversity:	0.10000
+	avg separation:	11.44005
+	accu: 		87.76978%
+	l1: 		14.95
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	14
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:45<00:00,  3.26s/it]
+	time: 	45.70
+	cross ent: 	0.22543
+	cluster: 	0.45384
+	separation:	13.14310
+	diversity:	0.10000
+	avg separation:	15.18606
+	accu: 		94.65116%
+	l1: 		14.95
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:15<00:00,  3.12s/it]
+	time: 	15.63
+	cross ent: 	0.69173
+	cluster: 	0.62454
+	separation:	9.71497
+	diversity:	0.10000
+	avg separation:	11.36887
+	accu: 		87.76978%
+	l1: 		14.95
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	15
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:54<00:00,  3.91s/it]
+	time: 	54.77
+	cross ent: 	0.22895
+	cluster: 	0.38894
+	separation:	13.09167
+	diversity:	0.10000
+	avg separation:	15.09908
+	accu: 		94.65116%
+	l1: 		14.95
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:16<00:00,  3.37s/it]
+	time: 	16.87
+	cross ent: 	0.68435
+	cluster: 	0.59079
+	separation:	9.63605
+	diversity:	0.10000
+	avg separation:	11.26816
+	accu: 		87.76978%
+	l1: 		14.95
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	16
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:47<00:00,  3.40s/it]
+	time: 	47.57
+	cross ent: 	0.22664
+	cluster: 	0.43207
+	separation:	13.33781
+	diversity:	0.10000
+	avg separation:	15.40180
+	accu: 		94.88372%
+	l1: 		14.94
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:13<00:00,  2.60s/it]
+	time: 	13.02
+	cross ent: 	0.68292
+	cluster: 	0.57740
+	separation:	9.58032
+	diversity:	0.10000
+	avg separation:	11.20223
+	accu: 		87.05036%
+	l1: 		14.94
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	17
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:35<00:00,  2.54s/it]
+	time: 	35.58
+	cross ent: 	0.22225
+	cluster: 	0.42974
+	separation:	13.28989
+	diversity:	0.10000
+	avg separation:	15.33619
+	accu: 		94.65116%
+	l1: 		14.94
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:05<00:00,  1.14s/it]
+	time: 	5.70
+	cross ent: 	0.67788
+	cluster: 	0.54820
+	separation:	9.43907
+	diversity:	0.10000
+	avg separation:	11.03116
+	accu: 		85.61151%
+	l1: 		14.94
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	18
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:21<00:00,  1.51s/it]
+	time: 	21.19
+	cross ent: 	0.19980
+	cluster: 	0.48986
+	separation:	13.33595
+	diversity:	0.10000
+	avg separation:	15.43965
+	accu: 		94.41860%
+	l1: 		14.94
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:05<00:00,  1.14s/it]
+	time: 	5.69
+	cross ent: 	0.67762
+	cluster: 	0.63791
+	separation:	9.74578
+	diversity:	0.10000
+	avg separation:	11.41107
+	accu: 		87.05036%
+	l1: 		14.94
+	avg proto dist:	1.39295
+	above 70.00%
+iteration: 	19
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:18<00:00,  1.29s/it]
+	time: 	18.00
+	cross ent: 	0.18777
+	cluster: 	0.35067
+	separation:	13.36482
+	diversity:	0.10000
+	avg separation:	15.39893
+	accu: 		95.34884%
+	l1: 		14.93
+	avg proto dist:	1.39295
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:05<00:00,  1.02s/it]
+	time: 	5.12
+	cross ent: 	0.68859
+	cluster: 	0.63295
+	separation:	9.79278
+	diversity:	0.10000
+	avg separation:	11.45891
+	accu: 		87.76978%
+	l1: 		14.93
+	avg proto dist:	1.39295
+	above 70.00%
+------------------------------------------
+
+epoch: 	6
+	joint
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:52<00:00,  3.75s/it]
+	time: 	52.53
+	cross ent: 	0.22919
+	cluster: 	0.61174
+	separation:	14.49818
+	diversity:	0.08379
+	avg separation:	16.48401
+	accu: 		93.72093%
+	l1: 		14.93
+	avg proto dist:	1.56210
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:05<00:00,  1.16s/it]
+	time: 	5.78
+	cross ent: 	0.74591
+	cluster: 	1.56246
+	separation:	12.26972
+	diversity:	0.03965
+	avg separation:	14.14076
+	accu: 		89.20863%
+	l1: 		14.93
+	avg proto dist:	1.56210
+	above 70.00%
+------------------------------------------
+
+epoch: 	7
+	joint
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:55<00:00,  3.99s/it]
+	time: 	55.91
+	cross ent: 	0.16135
+	cluster: 	0.37639
+	separation:	18.14295
+	diversity:	0.00551
+	avg separation:	19.29638
+	accu: 		95.11628%
+	l1: 		14.93
+	avg proto dist:	1.73130
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:05<00:00,  1.10s/it]
+	time: 	5.51
+	cross ent: 	1.01406
+	cluster: 	3.93226
+	separation:	16.62187
+	diversity:	0.00000
+	avg separation:	18.60777
+	accu: 		87.05036%
+	l1: 		14.93
+	avg proto dist:	1.73130
+	above 70.00%
+------------------------------------------
+
+epoch: 	8
+	joint
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:55<00:00,  3.95s/it]
+	time: 	55.26
+	cross ent: 	0.18366
+	cluster: 	0.37625
+	separation:	21.33161
+	diversity:	0.00000
+	avg separation:	21.86805
+	accu: 		94.88372%
+	l1: 		14.93
+	avg proto dist:	1.90923
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:06<00:00,  1.27s/it]
+	time: 	6.37
+	cross ent: 	0.91936
+	cluster: 	3.76772
+	separation:	17.74008
+	diversity:	0.00000
+	avg separation:	19.55662
+	accu: 		89.20863%
+	l1: 		14.93
+	avg proto dist:	1.90923
+	above 70.00%
+------------------------------------------
+
+epoch: 	9
+	joint
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [01:07<00:00,  4.85s/it]
+	time: 	67.92
+	cross ent: 	0.21173
+	cluster: 	0.48606
+	separation:	24.11414
+	diversity:	0.00000
+	avg separation:	24.58707
+	accu: 		93.95349%
+	l1: 		14.93
+	avg proto dist:	2.07778
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:07<00:00,  1.52s/it]
+	time: 	7.60
+	cross ent: 	0.56473
+	cluster: 	1.92170
+	separation:	19.24167
+	diversity:	0.00000
+	avg separation:	20.57090
+	accu: 		88.48921%
+	l1: 		14.93
+	avg proto dist:	2.07778
+	above 70.00%
+------------------------------------------
+
+epoch: 	10
+	joint
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [01:07<00:00,  4.81s/it]
+	time: 	67.41
+	cross ent: 	0.21074
+	cluster: 	0.53508
+	separation:	26.34145
+	diversity:	0.00000
+	avg separation:	26.88088
+	accu: 		92.32558%
+	l1: 		14.93
+	avg proto dist:	2.24317
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:07<00:00,  1.59s/it]
+	time: 	7.94
+	cross ent: 	0.67402
+	cluster: 	3.94066
+	separation:	22.45346
+	diversity:	0.00000
+	avg separation:	24.26766
+	accu: 		88.48921%
+	l1: 		14.93
+	avg proto dist:	2.24317
+	above 70.00%
+	push
+	Executing push ...
+	push time: 	23.821947813034058
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:07<00:00,  1.44s/it]
+	time: 	7.20
+	cross ent: 	0.96555
+	cluster: 	3.45424
+	separation:	20.44555
+	diversity:	0.69998
+	avg separation:	22.46666
+	accu: 		86.33094%
+	l1: 		14.93
+	avg proto dist:	1.88641
+	above 70.00%
+	last layer
+iteration: 	0
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:23<00:00,  1.66s/it]
+	time: 	23.21
+	cross ent: 	0.14831
+	cluster: 	0.24878
+	separation:	24.88751
+	diversity:	0.69998
+	avg separation:	25.92363
+	accu: 		94.41860%
+	l1: 		14.93
+	avg proto dist:	1.88641
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:06<00:00,  1.36s/it]
+	time: 	6.79
+	cross ent: 	1.05860
+	cluster: 	3.43603
+	separation:	21.13258
+	diversity:	0.69998
+	avg separation:	23.22758
+	accu: 		89.92806%
+	l1: 		14.93
+	avg proto dist:	1.88641
+	above 70.00%
+iteration: 	1
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:22<00:00,  1.60s/it]
+	time: 	22.42
+	cross ent: 	0.16591
+	cluster: 	0.25564
+	separation:	25.32043
+	diversity:	0.69998
+	avg separation:	26.37376
+	accu: 		94.65116%
+	l1: 		14.93
+	avg proto dist:	1.88641
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:08<00:00,  1.70s/it]
+	time: 	8.51
+	cross ent: 	1.05982
+	cluster: 	3.28388
+	separation:	21.06508
+	diversity:	0.69998
+	avg separation:	23.08832
+	accu: 		89.20863%
+	l1: 		14.93
+	avg proto dist:	1.88641
+	above 70.00%
+iteration: 	2
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:24<00:00,  1.78s/it]
+	time: 	24.90
+	cross ent: 	0.22024
+	cluster: 	0.27634
+	separation:	25.58216
+	diversity:	0.69998
+	avg separation:	26.62170
+	accu: 		93.72093%
+	l1: 		14.93
+	avg proto dist:	1.88641
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:07<00:00,  1.47s/it]
+	time: 	7.33
+	cross ent: 	1.07364
+	cluster: 	3.42922
+	separation:	21.19881
+	diversity:	0.69998
+	avg separation:	23.26989
+	accu: 		87.05036%
+	l1: 		14.93
+	avg proto dist:	1.88641
+	above 70.00%
+iteration: 	3
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:28<00:00,  2.01s/it]
+	time: 	28.12
+	cross ent: 	0.18870
+	cluster: 	0.12524
+	separation:	25.22076
+	diversity:	0.69998
+	avg separation:	26.23220
+	accu: 		95.58140%
+	l1: 		14.92
+	avg proto dist:	1.88641
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:08<00:00,  1.62s/it]
+	time: 	8.11
+	cross ent: 	1.09761
+	cluster: 	3.45893
+	separation:	21.27124
+	diversity:	0.69998
+	avg separation:	23.35046
+	accu: 		87.05036%
+	l1: 		14.92
+	avg proto dist:	1.88641
+	above 70.00%
+iteration: 	4
+train
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:26<00:00,  1.91s/it]
+	time: 	26.74
+	cross ent: 	0.16063
+	cluster: 	0.12329
+	separation:	25.25985
+	diversity:	0.69998
+	avg separation:	26.27111
+	accu: 		93.95349%
+	l1: 		14.92
+	avg proto dist:	1.88641
+test
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:08<00:00,  1.62s/it]
+	time: 	8.11
+	cross ent: 	1.12041
+	cluster: 	3.52857
+	separation:	21.33189
+	diversity:	0.69998
+	avg separation:	23.43317
+	accu: 		87.76978%
+	l1: 		14.92
+	avg proto dist:	1.88641
+	above 70.00%
+iteration: 	5
+train
+ 36%|█████████████████████████████████████████████▎                                                                                 | 5/14 [00:12<00:21,  2.44s/it]
+Traceback (most recent call last):
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/train.py", line 36, in <module>
+    run_training(args)
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/train_and_test.py", line 406, in run_training
+    _ = train(model=ppnet_multi, dataloader=train_loader, optimizer=last_layer_optimizer,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/train_and_test.py", line 184, in train
+    return _train_or_test(model=model, dataloader=dataloader, optimizer=optimizer,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/train_and_test.py", line 46, in _train_or_test
+    output, min_distances = model(input)
+                            ^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/parallel/data_parallel.py", line 167, in forward
+    return self.module(*inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 218, in forward
+    distances = self.prototype_distances(x)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 205, in prototype_distances
+    conv_features = self.conv_features(x)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/model.py", line 151, in conv_features
+    x = self.features(x)
+        ^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/DTU/responsible_ai/understandable-ProtoPNet/ppnet/resnet_features.py", line 195, in forward
+    x = self.conv1(x)
+        ^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bertramhage/Development/venvs/responsible_ai_understandable-ProtoPNet_venv/lib/python3.11/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
