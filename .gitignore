@@ -6,3 +6,6 @@ saved_models
 pretrained_models
 docs
 analysis
+.venv
+pretrained_models_own
+data/
