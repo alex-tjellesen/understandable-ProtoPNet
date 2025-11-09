@@ -54,8 +54,8 @@ def run_analysis(args: Namespace):
     log(f'Model base architecture: {model_base_architecture}')
     log(f'Experiment run: {experiment_run}\n')
 
-    ppnet = torch.load(args.model)
-    ppnet = ppnet.cuda()
+    ppnet = torch.load(args.model, map_location=torch.device('cpu'))
+    ppnet = ppnet.to('cpu')
     ppnet_multi = torch.nn.DataParallel(ppnet)
 
     img_size = ppnet_multi.module.img_size

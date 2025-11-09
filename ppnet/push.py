@@ -106,8 +106,8 @@ def push_prototypes(dataloader,  # pytorch dataloader (must be unnormalized in [
     log('\tExecuting push ...')
     prototype_update = np.reshape(global_min_fmap_patches,
                                   tuple(prototype_shape))
-    prototype_network_parallel.module.prototype_vectors.data.copy_(torch.tensor(prototype_update, dtype=torch.float32).cuda())
-    # prototype_network_parallel.cuda()
+    prototype_network_parallel.module.prototype_vectors.data.copy_(torch.tensor(prototype_update, dtype=torch.float32).to('cpu'))
+    # prototype_network_parallel.to('cpu')
     end = time.time()
     log('\tpush time: \t{0}'.format(end - start))
 
@@ -142,7 +142,7 @@ def update_prototypes_on_batch(search_batch_input,
         search_batch = search_batch_input
 
     with torch.no_grad():
-        search_batch = search_batch.cuda()
+        search_batch = search_batch.to('cpu')
         # this computation currently is not parallelized
         protoL_input_torch, proto_dist_torch = prototype_network_parallel.module.push_forward(search_batch)
 

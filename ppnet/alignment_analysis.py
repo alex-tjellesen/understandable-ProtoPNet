@@ -84,8 +84,8 @@ def run_analysis(args: Namespace):
     log(f'Experiment run: {experiment_run}')
     log(f'Output path: {os.path.abspath(save_analysis_path)}\n')
 
-    ppnet = torch.load(args.model)
-    ppnet = ppnet.cuda()
+    ppnet = torch.load(args.model, map_location=torch.device('cpu'))
+    ppnet = ppnet.to('cpu')
     ppnet.eval()
     ppnet_multi = torch.nn.DataParallel(ppnet)
 
@@ -119,7 +119,7 @@ def run_analysis(args: Namespace):
     # Compute prototypes activations for the class images
     prototype_activation_patterns = []
     for (imgs, _) in tqdm(dataloader, desc=f'Computing prototypes activations'):
-        imgs = imgs.cuda()
+        imgs = imgs.to('cpu')
         _, distances = ppnet.push_forward(imgs)
         batch_prototype_activation_patterns = ppnet.distance_2_similarity(distances)
         if ppnet.prototype_activation_function == 'linear':

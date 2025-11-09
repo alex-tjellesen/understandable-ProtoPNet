@@ -123,8 +123,8 @@ def _run_analysis_on_image(args: Namespace):
     log(f'Experiment run: {experiment_run}')
     log(f'Output path: {os.path.abspath(save_analysis_path)}\n')
 
-    ppnet = torch.load(args.model)
-    ppnet = ppnet.cuda()
+    ppnet = torch.load(args.model, map_location=torch.device('cpu'))
+    ppnet = ppnet.to('cpu')
     ppnet_multi = torch.nn.DataParallel(ppnet)
 
     img_pil = Image.open(args.img)
@@ -166,7 +166,7 @@ def _run_analysis_on_image(args: Namespace):
     img_tensor = preprocess(img_pil)
     img_variable = Variable(img_tensor.unsqueeze(0))
 
-    images_test = img_variable.cuda()
+    images_test = img_variable.to('cpu')
     labels_test = torch.tensor([ dataset.class_to_idx[img_class] ])
 
     logits, min_distances = ppnet_multi(images_test)
