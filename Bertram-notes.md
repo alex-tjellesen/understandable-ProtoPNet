@@ -1,11 +1,11 @@
 ## What is an explanation
-Given a model $ F: \mathcal{X} \to \mathcal{Y} $ and an input $ x \in \mathcal{X} $,  an explanation $ A(x; F) $ is a lower-dimensional, interpretable projection of the causal computational pathway that led to the prediction $ F(x) $. Formally,
+Given a model $F: \mathcal{X} \to \mathcal{Y}$ and an input $x \in \mathcal{X}$,  an explanation $A(x; F)$ is a lower-dimensional, interpretable projection of the causal computational pathway that led to the prediction $F(x)$. Formally,
 
 $$
 A(x; F) = P \circ T(x; F)
 $$
 
-where $ T(x; F) $ encodes the mathematical trace of computations contributing to $ F(x) $,  and $ P $ is a projection onto an interpretable subspace  $ \mathcal{Z} \subset \mathbb{R}^k $ with $ k \ll \dim(T) $.
+where $T(x; F)$ encodes the mathematical trace of computations contributing to $F(x)$,  and $P$ is a projection onto an interpretable subspace  $\mathcal{Z} \subset \mathbb{R}^k$ with $k \ll \dim(T)$.
 
 ## What makes an explanation valuable?
 The non-trivial part of deriving a "good" explanation lies in the dimensionality reducing projection $P$ which gives rise to the following pitfalls:
