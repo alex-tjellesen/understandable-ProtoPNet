@@ -1,0 +1,60 @@
+
+============================================================
+Prototype Activation Statistics (Evidence-Based)
+============================================================
+Total test samples: 5794
+Test accuracy: 78.08%
+
+--- Activated Prototypes per Sample (Positive Evidence) ---
+Mean: 10.00 ± 0.00
+Median: 10
+Min: 10, Max: 10
+
+--- Evidence Concentration in Top Prototypes ---
+Top-1 Prototype (% of total evidence):
+  Mean: 29.96% ± 8.70%
+  Median: 28.58%
+  Min: 11.08%, Max: 64.00%
+
+Top-3 Prototypes (% of total evidence):
+  Mean: 64.75% ± 9.73%
+  Median: 65.24%
+  Min: 32.64%, Max: 91.30%
+
+Top-5 Prototypes (% of total evidence):
+  Mean: 83.83% ± 7.00%
+  Median: 84.93%
+  Min: 53.90%, Max: 96.59%
+
+--- Max Similarity per Sample ---
+Mean: 3.0406 ± 1.3859
+Median: 3.0130
+Min: 0.1408, Max: 7.6079
+
+--- Min Distance per Sample ---
+Mean: 0.1583 ± 0.3058
+Median: 0.0516
+Min: 0.0004, Max: 6.6149
+
+--- Max Evidence per Sample ---
+Mean: 3.0132 ± 1.4038
+Median: 2.9856
+Min: 0.1408, Max: 7.6079
+
+--- Correct vs Incorrect Classifications ---
+Correctly classified samples: 4524
+  Mean activated prototypes: 10.00
+  Mean top-1 evidence %: 31.51%
+  Mean top-3 evidence %: 66.70%
+  Mean top-5 evidence %: 85.21%
+  Mean max similarity: 3.3551
+  Mean max evidence: 3.3396
+Incorrectly classified samples: 1270
+  Mean activated prototypes: 10.00
+  Mean top-1 evidence %: 24.42%
+  Mean top-3 evidence %: 57.82%
+  Mean top-5 evidence %: 78.93%
+  Mean max similarity: 1.9205
+  Mean max evidence: 1.8503
+============================================================
+
