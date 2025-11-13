@@ -18,7 +18,7 @@ Thus a "good" explanation is an explanation that exhibits **both** (1.) high fid
 The following measures aims to assess the above stated criteria for a good explanation and while not being able to measure every aspect of the criteria in full arguably correlates sufficiently well with the performance on the criteria themselves.
 
 ### Measuring fidelity
-We assume that the convolutional layers of the ProtoPNet aren't affected by the models goal of achieving good explanability which is a crude assumption given ProtoPNet intrinsically embedding the explanability in the model via the loss function and common backpropagation. For a given test sample $x$ and a model prediction $\hat{y}$ we attempt to reconstruct the activations of the layer preceding the prototype layer (denote this layer $\ell_{-1}$) solely based on the prototype activations. We measure the reconstruction error to the actual activations of $\ell_{-1}$ by the MSE across layer nodes and channels.
+We assume that the convolutional layers of the ProtoPNet aren't affected by the models goal of achieving good explanability which is a crude assumption given ProtoPNet intrinsically embedding the explanability in the model via the loss function and common backpropagation. For a given test sample $x$ and a model prediction $\hat{y}$ we attempt to reconstruct the activations of the layer preceding the prototype layers (denote this layer $\ell_{-1}$) solely based on the prototype activations. We measure the reconstruction error to the actual activations of $\ell_{-1}$ by the MSE across layer nodes and channels.
 
 ### Measuring human interpretability
 While there are multiple aspects that factor into making an explanation interpretable to humans we chose to focus on a single yet important factor: to make an explanation interpretable it must consist of just a few "concepts", which for the case of ProtoPNet means that a classification should rely on just a few prototypes and not many. For each correctly predicted test sample, we determine which prototypes contribute positively to the predicted class by computing an evidence score defined by the product of the prototype activation and it's final layer weight. We then measure what percentage of the total positive evidence comes from the top-1, top-3, and top-5 prototypes. High concentration percentages indicate that the model's decision relies on only a few key prototypes, making the explanation simpler and more interpretable to humans. We only consider correctly predicted samples to isolate the performance of the explainability layer of the model from the overall classifier.
@@ -26,16 +26,16 @@ While there are multiple aspects that factor into making an explanation interpre
 ## Experimental setup and results
 
 **Fidelity**\
-For testing fidelity we define a FCNN model and task it with learning the mapping from the prototype activations to the preceding non-prototype layer $\ell_{-1}$: 
+For testing fidelity we define a simple FCNN model and task it with learning the mapping from the prototype activations to the preceding non-prototype layer $\ell_{-1}$: 
 $$
 R: \mathbb{R}^{m} \to \mathbb{R}^{d \times h \times w}
 $$
 
-where $m$ is the number of prototypes, and $d \times h \times w$ are the dimensions (channels, height, width) of the activations in layer $\ell_{-1}$. The reconstruction error is then measured as:
+where $m$ is the number of prototypes, and $d \times h \times w$ are the dimensions (channels, height, width) of the activations in layer $\ell_{-1}$, $\ell_{-1}$ being a convolutional layer. The reconstruction error is then measured as:
 
 $$\mathcal{L}_{\text{Fidelity}}(A) = \frac{1}{H \cdot W \cdot C} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{c=1}^{C} \left( \mathbf{Z}_{h,w,c} - \hat{\mathbf{Z}}_{h,w,c} \right)^2$$
 
-where $\mathbf{Z}$ represents the true activations of layer $\ell_{-1}$ for a given input, $\hat{\mathbf{Z}}$ represents the reconstructed activations from the prototype activations, and $H$, $W$, $C$ are the height, width, and number of channels of layer $\ell_{-1}$ respectively.
+where $\mathbf{Z}$ represents the true activations of layer $\ell_{-1}$ for a given input, $\hat{\mathbf{Z}}$ represents the reconstructed activations from the prototype activations, and $H$, $W$, $C$ are the height, width, and number of channels of layer $\ell_{-1}$ respectively. For our model $H=W=7$, $C=128$.
 
 The reconstruction model $R$ is implemented with single hidden layer followed by ReLU activation. We train the model on the training set to avoid memorization, and train it for 10 epochs with a batch size of 50 and the Adam optimizer.
 
